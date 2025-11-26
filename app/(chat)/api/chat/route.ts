@@ -65,7 +65,7 @@ const getTokenlensCatalog = cache(
   { revalidate: 24 * 60 * 60 } // 24 hours
 );
 
-export function getStreamContext() {
+function getStreamContext() {
   if (!globalStreamContext) {
     try {
       globalStreamContext = createResumableStreamContext({
