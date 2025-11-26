@@ -23,8 +23,10 @@ export default async function Layout({
       />
       <DataStreamProvider>
         <SidebarProvider defaultOpen={!isCollapsed}>
-          <AppSidebar user={session?.user} />
-          <SidebarInset>{children}</SidebarInset>
+          <div className="sfc-gradient-bg flex min-h-screen w-full">
+            <AppSidebar user={session?.user} />
+            <SidebarInset className="sfc-chat-area">{children}</SidebarInset>
+          </div>
         </SidebarProvider>
       </DataStreamProvider>
     </>

@@ -178,76 +178,47 @@ export async function POST(request: Request) {
     let finalMergedUsage: AppUsage | undefined;
 
     const stream = createUIMessageStream({
-      execute: ({ writer: dataStream }) => {
-        const result = streamText({
-          model: myProvider.languageModel(selectedChatModel),
-          system: systemPrompt({ selectedChatModel, requestHints }),
-          messages: convertToModelMessages(uiMessages),
-          stopWhen: stepCountIs(5),
-          experimental_activeTools:
-            selectedChatModel === "chat-model-reasoning"
-              ? []
-              : [
-                  "getWeather",
-                  "createDocument",
-                  "updateDocument",
-                  "requestSuggestions",
-                ],
-          experimental_transform: smoothStream({ chunking: "word" }),
-          tools: {
-            getWeather,
-            createDocument: createDocument({ session, dataStream }),
-            updateDocument: updateDocument({ session, dataStream }),
-            requestSuggestions: requestSuggestions({
-              session,
-              dataStream,
+      execute: async ({ writer: dataStream }) => {
+        // Extract text from message parts
+        const userMessageContent = message.parts
+          .filter((part) => part.type === "text")
+          .map((part) => (part as any).text)
+          .join("\n");
+
+        try {
+          // Call the FastAPI backend
+          const backendResponse = await fetch("http://127.0.0.1:8000/ai/divination", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              message: userMessageContent,
+              user_id: 1, // TODO: Map session.user.id to backend user ID properly
+              session_id: id,
             }),
-          },
-          experimental_telemetry: {
-            isEnabled: isProductionEnvironment,
-            functionId: "stream-text",
-          },
-          onFinish: async ({ usage }) => {
-            try {
-              const providers = await getTokenlensCatalog();
-              const modelId =
-                myProvider.languageModel(selectedChatModel).modelId;
-              if (!modelId) {
-                finalMergedUsage = usage;
-                dataStream.write({
-                  type: "data-usage",
-                  data: finalMergedUsage,
-                });
-                return;
-              }
+          });
 
-              if (!providers) {
-                finalMergedUsage = usage;
-                dataStream.write({
-                  type: "data-usage",
-                  data: finalMergedUsage,
-                });
-                return;
-              }
+          if (!backendResponse.ok) {
+            throw new Error(`Backend error: ${backendResponse.statusText}`);
+          }
 
-              const summary = getUsage({ modelId, usage, providers });
-              finalMergedUsage = { ...usage, ...summary, modelId } as AppUsage;
-              dataStream.write({ type: "data-usage", data: finalMergedUsage });
-            } catch (err) {
-              console.warn("TokenLens enrichment failed", err);
-              finalMergedUsage = usage;
-              dataStream.write({ type: "data-usage", data: finalMergedUsage });
-            }
-          },
-        });
+          const backendData = await backendResponse.json();
 
-        result.consumeStream();
+          // Append the response as an assistant message
+          dataStream.appendMessage({
+            role: "assistant",
+            content: backendData.reply,
+            id: generateUUID(),
+            createdAt: new Date(),
+            parts: [{ type: "text", text: backendData.reply }],
+          });
 
-        dataStream.merge(
-          result.toUIMessageStream({
-            sendReasoning: true,
-          })
-        );
+          dataStream.close();
+        } catch (error) {
+          console.error("Backend call failed", error);
+          dataStream.close();
+        }
       },
       generateId: generateUUID,
       onFinish: async ({ messages }) => {

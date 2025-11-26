@@ -50,6 +50,14 @@
   /* border radius unit */
   --radius: 0.5rem;
   --sidebar: hsl(0 0% 98%);
+  
+  /* SFC Design System Colors */
+  --sfc-green-primary: #023344;
+  --sfc-green-6: #1a5d73;
+  --sfc-green-7: #438aa2;
+  --sfc-green-8: #7fbcd0;
+  --sfc-green-9: #ccf2ff;
+  --sfc-gradient: linear-gradient(160deg, #023344 0%, #0a4a5e 20%, #2d7a8f 45%, #5ba3b8 70%, #8dcad8 100%);
 }
 
 /* define design tokens (dark mode) */
@@ -87,6 +95,14 @@
   --sidebar-border: hsl(240 3.7% 15.9%);
   --sidebar-ring: hsl(217.2 91.2% 59.8%);
   --sidebar: hsl(240 5.9% 10%);
+  
+  /* SFC Design System Colors - Dark Mode */
+  --sfc-green-primary: #023344;
+  --sfc-green-6: #1a5d73;
+  --sfc-green-7: #438aa2;
+  --sfc-green-8: #7fbcd0;
+  --sfc-green-9: #ccf2ff;
+  --sfc-gradient: linear-gradient(135deg, #023344 0%, #1a5d73 35%, #438aa2 65%, #7fbcd0 100%);
 }
 
 /* define theme */
@@ -317,4 +333,121 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* SFC Chatbot Design System Styles */
+.sfc-gradient-bg {
+  background: var(--sfc-gradient);
+  min-height: 100vh;
+}
+
+/* Glass effect sidebar */
+.sfc-sidebar {
+  background: rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 0 20px 0 20px !important;
+  border: none !important;
+}
+
+.sfc-sidebar * {
+  color: rgba(255, 255, 255, 1) !important;
+}
+
+.sfc-sidebar .text-muted-foreground,
+.sfc-sidebar [class*="text-sidebar-foreground"] {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Active sidebar item */
+.sfc-sidebar-item-active {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 16px 0 16px 0 !important;
+}
+
+/* Chat message bubbles */
+.sfc-user-bubble {
+  background: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: -2px -2px 15px -1px rgba(255, 255, 255, 0.2);
+  border-radius: 24px !important;
+  color: white !important;
+  padding: 8px 20px !important;
+}
+
+.sfc-assistant-message {
+  color: white !important;
+}
+
+.sfc-assistant-message h1,
+.sfc-assistant-message h2,
+.sfc-assistant-message h3 {
+  color: white !important;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+}
+
+.sfc-assistant-message p,
+.sfc-assistant-message li {
+  color: white !important;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Glass input container */
+.sfc-input-container {
+  background: rgba(255, 255, 255, 0.5) !important;
+  box-shadow: inset 2px 2px 5px 1px rgba(255, 255, 255, 0.5);
+  border-radius: 24px !important;
+  border: none !important;
+  padding: 12px !important;
+}
+
+.sfc-input-inner {
+  background: rgba(255, 255, 255, 0.8) !important;
+  border-radius: 24px !important;
+  border: none !important;
+}
+
+.sfc-input-inner input,
+.sfc-input-inner textarea {
+  background: transparent !important;
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.sfc-input-inner input::placeholder,
+.sfc-input-inner textarea::placeholder {
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Web Search button */
+.sfc-web-search-btn {
+  background: rgba(0, 0, 0, 0.2) !important;
+  border-radius: 60px !important;
+  color: white !important;
+  padding: 8px 14px !important;
+}
+
+/* Send button */
+.sfc-send-btn {
+  background: black !important;
+  border-radius: 99px !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+}
+
+/* User profile in sidebar */
+.sfc-user-profile {
+  color: white !important;
+}
+
+.sfc-user-profile-subtitle {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Message action icons */
+.sfc-message-actions {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Transparent chat area background */
+.sfc-chat-area {
+  background: transparent !important;
 }

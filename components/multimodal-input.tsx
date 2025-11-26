@@ -308,7 +308,7 @@ function PureMultimodalInput({
       />
 
       <PromptInput
-        className="rounded-xl border border-border bg-background p-3 shadow-xs transition-all duration-200 focus-within:border-border hover:border-muted-foreground/50"
+        className="sfc-input-container rounded-3xl border-0 p-3 shadow-xs transition-all duration-200"
         onSubmit={(event) => {
           event.preventDefault();
           if (status !== "ready") {
@@ -384,7 +384,7 @@ function PureMultimodalInput({
             <StopButton setMessages={setMessages} stop={stop} />
           ) : (
             <PromptInputSubmit
-              className="size-8 rounded-full bg-primary text-primary-foreground transition-colors duration-200 hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground"
+              className="size-8 rounded-full bg-black text-white transition-colors duration-200 hover:bg-black/80 disabled:bg-muted disabled:text-muted-foreground border border-white/50"
               disabled={!input.trim() || uploadQueue.length > 0}
               status={status}
 	      data-testid="send-button"
