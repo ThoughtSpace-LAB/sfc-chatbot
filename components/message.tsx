@@ -67,8 +67,8 @@ const PurePreviewMessage = ({
         })}
       >
         {message.role === "assistant" && (
-          <div className="-mt-1 flex size-8 shrink-0 items-center justify-center rounded-full bg-white/20 ring-1 ring-white/30">
-            <SparklesIcon size={14} className="text-white" />
+          <div className="-mt-1 flex size-8 shrink-0 items-center justify-center rounded-full bg-white/20 ring-1 ring-white/30 text-white">
+            <SparklesIcon size={14} />
           </div>
         )}
 

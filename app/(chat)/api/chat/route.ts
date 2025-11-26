@@ -8,11 +8,6 @@ import {
   streamText,
 } from "ai";
 import { unstable_cache as cache } from "next/cache";
-import { after } from "next/server";
-import {
-  createResumableStreamContext,
-  type ResumableStreamContext,
-} from "resumable-stream";
 import type { ModelCatalog } from "tokenlens/core";
 import { fetchModels } from "tokenlens/fetch";
 import { getUsage } from "tokenlens/helpers";
@@ -44,10 +39,9 @@ import type { AppUsage } from "@/lib/usage";
 import { convertToUIMessages, generateUUID } from "@/lib/utils";
 import { generateTitleFromUserMessage } from "../../actions";
 import { type PostRequestBody, postRequestBodySchema } from "./schema";
+import { getStreamContext } from "./stream-context";
 
 export const maxDuration = 60;
-
-let globalStreamContext: ResumableStreamContext | null = null;
 
 const getTokenlensCatalog = cache(
   async (): Promise<ModelCatalog | undefined> => {
@@ -64,26 +58,6 @@ const getTokenlensCatalog = cache(
   ["tokenlens-catalog"],
   { revalidate: 24 * 60 * 60 } // 24 hours
 );
-
-function getStreamContext() {
-  if (!globalStreamContext) {
-    try {
-      globalStreamContext = createResumableStreamContext({
-        waitUntil: after,
-      });
-    } catch (error: any) {
-      if (error.message.includes("REDIS_URL")) {
-        console.log(
-          " > Resumable streams are disabled due to missing REDIS_URL"
-        );
-      } else {
-        console.error(error);
-      }
-    }
-  }
-
-  return globalStreamContext;
-}
 
 export async function POST(request: Request) {
   let requestBody: PostRequestBody;
@@ -205,19 +179,22 @@ export async function POST(request: Request) {
 
           const backendData = await backendResponse.json();
 
-          // Append the response as an assistant message
-          dataStream.appendMessage({
-            role: "assistant",
+          // Write the response as an assistant message
+          const assistantMessage = {
+            role: "assistant" as const,
             content: backendData.reply,
             id: generateUUID(),
             createdAt: new Date(),
-            parts: [{ type: "text", text: backendData.reply }],
+            parts: [{ type: "text" as const, text: backendData.reply }],
+          };
+          
+          dataStream.write({
+            type: "data-appendMessage",
+            data: JSON.stringify(assistantMessage),
+            transient: true,
           });
-
-          dataStream.close();
         } catch (error) {
           console.error("Backend call failed", error);
-          dataStream.close();
         }
       },
       generateId: generateUUID,
