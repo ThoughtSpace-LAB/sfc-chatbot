@@ -48,7 +48,7 @@ export function SidebarUserNav({ user }: { user: User }) {
               </SidebarMenuButton>
             ) : (
               <SidebarMenuButton
-                className="h-10 bg-transparent data-[state=open]:bg-white/10 data-[state=open]:text-white"
+                className="sfc-user-profile h-10 bg-transparent data-[state=open]:bg-white/10 data-[state=open]:text-white"
                 data-testid="user-nav-button"
               >
                 <Image

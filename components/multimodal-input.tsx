@@ -384,7 +384,7 @@ function PureMultimodalInput({
             <StopButton setMessages={setMessages} stop={stop} />
           ) : (
             <PromptInputSubmit
-              className="size-8 rounded-full bg-black text-white transition-colors duration-200 hover:bg-black/80 disabled:bg-muted disabled:text-muted-foreground border border-white/50"
+              className="sfc-send-btn size-8 rounded-full bg-black text-white transition-colors duration-200 hover:bg-black/80 disabled:bg-muted disabled:text-muted-foreground border border-white/50"
               disabled={!input.trim() || uploadQueue.length > 0}
               status={status}
 	      data-testid="send-button"

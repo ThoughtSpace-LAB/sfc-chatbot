@@ -52,12 +52,130 @@
   --sidebar: hsl(0 0% 98%);
   
   /* SFC Design System Colors */
-  --sfc-green-primary: #05233D;
-  --sfc-green-6: #1A6879;
-  --sfc-green-7: #085A6F;
-  --sfc-green-8: #0BA28E;
+  --sfc-green-primary: #09101e;
+  --sfc-green-4: #023445;
+  --sfc-green: #023344;
+  --sfc-green-6: #1a5d73;
+  --sfc-green-7: #438aa2;
+  --sfc-green-8: #7fbcd0;
   --sfc-green-9: #ccf2ff;
-  --sfc-gradient: linear-gradient(135deg, #05233D 0%, #085A6F 35%, #1A6879 65%, #0BA28E 100%);
+  --sfc-gradient: linear-gradient(45deg, #09101e 0%, #1a6774 41%, #34be87 72%, #023344 100%);
+
+  /* Figma Design Tokens */
+  --button-medium-font-family: "Roboto", Helvetica;
+  --button-medium-font-size: 14px;
+  --button-medium-font-style: normal;
+  --button-medium-font-weight: 500;
+  --button-medium-letter-spacing: 0.6px;
+  --button-medium-line-height: 24px;
+  --button-small-font-family: "Roboto", Helvetica;
+  --button-small-font-size: 12px;
+  --button-small-font-style: normal;
+  --button-small-font-weight: 500;
+  --button-small-letter-spacing: 0.6px;
+  --button-small-line-height: 16px;
+  --greengreen: rgba(2, 51, 68, 1);
+  --greengreen-4: rgba(2, 52, 69, 1);
+  --greengreen-6: rgba(26, 93, 115, 1);
+  --greengreen-7: rgba(67, 138, 162, 1);
+  --greengreen-8: rgba(127, 188, 208, 1);
+  --greengreen-9: rgba(204, 242, 255, 1);
+  --greennew-color: rgba(200, 200, 200, 1);
+  --greennew-color-1: rgba(200, 200, 200, 1);
+  --headline-large-font-family: "Roboto", Helvetica;
+  --headline-large-font-size: 32px;
+  --headline-large-font-style: normal;
+  --headline-large-font-weight: 500;
+  --headline-large-letter-spacing: 0.4px;
+  --headline-large-line-height: 36px;
+  --headline-medium-font-family: "Roboto", Helvetica;
+  --headline-medium-font-size: 26px;
+  --headline-medium-font-style: normal;
+  --headline-medium-font-weight: 500;
+  --headline-medium-letter-spacing: 0.4px;
+  --headline-medium-line-height: 36px;
+  --headline-xlarge-font-family: "Roboto", Helvetica;
+  --headline-xlarge-font-size: 36px;
+  --headline-xlarge-font-style: normal;
+  --headline-xlarge-font-weight: 500;
+  --headline-xlarge-letter-spacing: 0.4px;
+  --headline-xlarge-line-height: 42px;
+  --text-medium-font-family: "Roboto", Helvetica;
+  --text-medium-font-size: 14px;
+  --text-medium-font-style: normal;
+  --text-medium-font-weight: 400;
+  --text-medium-letter-spacing: 0.4px;
+  --text-medium-line-height: 22px;
+  --text-small-font-family: "Roboto", Helvetica;
+  --text-small-font-size: 11px;
+  --text-small-font-style: normal;
+  --text-small-font-weight: 400;
+  --text-small-letter-spacing: 0.4px;
+  --text-small-line-height: 20px;
+  --text-subtle-font-family: "Roboto", Helvetica;
+  --text-subtle-font-size: 10px;
+  --text-subtle-font-style: normal;
+  --text-subtle-font-weight: 400;
+  --text-subtle-letter-spacing: 0.2px;
+  --text-subtle-line-height: 16px;
+  --textbox-regular-font-family: "Roboto", Helvetica;
+  --textbox-regular-font-size: 12px;
+  --textbox-regular-font-style: normal;
+  --textbox-regular-font-weight: 400;
+  --textbox-regular-letter-spacing: 0.4px;
+  --textbox-regular-line-height: 22px;
+
+  /* Legacy Tailwind font tokens */
+  --body-large-font-family: "Roboto", Helvetica;
+  --body-large-font-size: 20px;
+  --body-large-font-style: normal;
+  --body-large-font-weight: 600;
+  --body-large-letter-spacing: 0.6px;
+  --body-large-line-height: 36px;
+  --headline-lg-font-family: "Roboto", Helvetica;
+  --headline-lg-font-size: 32px;
+  --headline-lg-font-style: normal;
+  --headline-lg-font-weight: 500;
+  --headline-lg-letter-spacing: 0.4px;
+  --headline-lg-line-height: 42px;
+  --headline-md-font-family: "Roboto", Helvetica;
+  --headline-md-font-size: 18px;
+  --headline-md-font-style: normal;
+  --headline-md-font-weight: 500;
+  --headline-md-letter-spacing: 0.4px;
+  --headline-md-line-height: 22px;
+  --text-large-font-family: "Roboto", Helvetica;
+  --text-large-font-size: 16px;
+  --text-large-font-style: normal;
+  --text-large-font-weight: 500;
+  --text-large-letter-spacing: 0.4px;
+  --text-large-line-height: 26px;
+  --text-md-font-family: "Roboto", Helvetica;
+  --text-md-font-size: 14px;
+  --text-md-font-style: normal;
+  --text-md-font-weight: 400;
+  --text-md-letter-spacing: 0.4px;
+  --text-md-line-height: 22px;
+  --text-md-hightlight-font-family: "Roboto", Helvetica;
+  --text-md-hightlight-font-size: 14px;
+  --text-md-hightlight-font-style: normal;
+  --text-md-hightlight-font-weight: 600;
+  --text-md-hightlight-letter-spacing: 0.4px;
+  --text-md-hightlight-line-height: 22px;
+  --text-sm-font-family: "Roboto", Helvetica;
+  --text-sm-font-size: 12px;
+  --text-sm-font-style: normal;
+  --text-sm-font-weight: 400;
+  --text-sm-letter-spacing: 0.2px;
+  --text-sm-line-height: 16px;
+  --text-xs-font-family: "Roboto", Helvetica;
+  --text-xs-font-size: 10px;
+  --text-xs-font-style: normal;
+  --text-xs-font-weight: 400;
+  --text-xs-letter-spacing: 0.2px;
+  --text-xs-line-height: 12px;
+
+  --animate-spin: spin 1s linear infinite;
 }
 
 /* define design tokens (dark mode) */
@@ -97,12 +215,14 @@
   --sidebar: hsl(240 5.9% 10%);
   
   /* SFC Design System Colors - Dark Mode */
-  --sfc-green-primary: #05233D;
-  --sfc-green-6: #1A6879;
-  --sfc-green-7: #085A6F;
-  --sfc-green-8: #0BA28E;
+  --sfc-green-primary: #09101e;
+  --sfc-green-4: #023445;
+  --sfc-green: #023344;
+  --sfc-green-6: #1a5d73;
+  --sfc-green-7: #438aa2;
+  --sfc-green-8: #7fbcd0;
   --sfc-green-9: #ccf2ff;
-  --sfc-gradient: linear-gradient(135deg, #05233D 0%, #085A6F 35%, #1A6879 65%, #0BA28E 100%);
+  --sfc-gradient: linear-gradient(45deg, #09101e 0%, #1a6774 41%, #34be87 72%, #023344 100%);
 }
 
 /* define theme */
@@ -178,6 +298,21 @@
   }
 }
 
+@layer base {
+  button,
+  input,
+  select,
+  textarea {
+    @apply appearance-none bg-transparent border-0 outline-none;
+  }
+}
+
+@layer components {
+  .all-\[unset\] {
+    all: unset;
+  }
+}
+
 @utility text-balance {
   text-wrap: balance;
 }
@@ -192,6 +327,141 @@
 
 @utility overscroll-behavior-contain {
   overscroll-behavior: contain;
+}
+
+@utility font-body-large {
+  font-family: var(--body-large-font-family);
+}
+
+@utility font-headline-lg {
+  font-family: var(--headline-lg-font-family);
+}
+
+@utility font-headline-md {
+  font-family: var(--headline-md-font-family);
+}
+
+@utility font-text-large {
+  font-family: var(--text-large-font-family);
+}
+
+@utility font-text-md {
+  font-family: var(--text-md-font-family);
+}
+
+@utility font-text-md-hightlight {
+  font-family: var(--text-md-hightlight-font-family);
+}
+
+@utility font-text-sm {
+  font-family: var(--text-sm-font-family);
+}
+
+@utility font-text-xs {
+  font-family: var(--text-xs-font-family);
+}
+
+@utility animate-fade-in {
+  animation: fade-in 1s var(--animation-delay, 0s) ease forwards;
+}
+
+@utility animate-fade-up {
+  animation: fade-up 1s var(--animation-delay, 0s) ease forwards;
+}
+
+@utility animate-marquee {
+  animation: marquee var(--duration) infinite linear;
+}
+
+@utility animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+
+@utility animate-shimmer {
+  animation: shimmer 8s infinite;
+}
+
+@utility animate-spin {
+  animation: var(--animate-spin);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes image-glow {
+  0% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.74, 0.25, 0.76, 1);
+  }
+
+  10% {
+    opacity: 0.7;
+    animation-timing-function: cubic-bezier(0.12, 0.01, 0.08, 0.99);
+  }
+
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  90%,
+  to {
+    background-position: calc(-100% - var(--shimmer-width)) 0;
+  }
+
+  30%,
+  60% {
+    background-position: calc(100% + var(--shimmer-width)) 0;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
 }
 
 @layer utilities {

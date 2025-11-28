@@ -71,7 +71,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">
+      <body className="antialiased sfc-gradient-bg">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
