@@ -15,6 +15,8 @@
 
 /* define design tokens (light mode) */
 :root {
+  /* 换掉背景色 */
+  --background-gradient: var(--background);
   --background: hsl(0 0% 100%);
   --foreground: hsl(240 10% 3.9%);
   --card: hsl(0 0% 100%);
@@ -54,7 +56,15 @@
 
 /* define design tokens (dark mode) */
 .dark {
-  --background: hsl(240 10% 3.9%);
+  /* 换掉背景色 */
+  --background-gradient: linear-gradient(
+    135deg,           /* 角度，改成右上↘左下那种感觉 */
+    #05233D 0%,
+    #085A6F 25%,
+    #0BA28E 50%,
+    #1A6879 75%,
+    #38C5AB 100%
+  );
   --foreground: hsl(0 0% 98%);
   --card: hsl(240 10% 3.9%);
   --card-foreground: hsl(0 0% 98%);
@@ -78,7 +88,8 @@
   --chart-3: hsl(30 80% 55%);
   --chart-4: hsl(280 65% 60%);
   --chart-5: hsl(340 75% 55%);
-  --sidebar-background: hsl(240 5.9% 10%);
+/* 增加透明度 / 0.7 */
+  --sidebar-background: hsl(240 5.9% 10% / 0.7);
   --sidebar-foreground: hsl(240 4.8% 95.9%);
   --sidebar-primary: hsl(224.3 76.3% 48%);
   --sidebar-primary-foreground: hsl(0 0% 100%);
@@ -86,7 +97,8 @@
   --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
   --sidebar-border: hsl(240 3.7% 15.9%);
   --sidebar-ring: hsl(217.2 91.2% 59.8%);
-  --sidebar: hsl(240 5.9% 10%);
+  /* 增加透明度 / 0.7 */
+  --sidebar: hsl(240 5.9% 10% / 0.7);
 }
 
 /* define theme */
@@ -99,8 +111,8 @@
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
-
-  --color-background: var(--background);
+/* 换掉背景色 */
+  --color-background: var(--background-gradient);
   --color-foreground: var(--foreground);
 
   --color-card: var(--card);
@@ -201,6 +213,8 @@
 
   body {
     @apply bg-background text-foreground;
+    /* 换掉背景色 */
+    background: var(--background-gradient, var(--background));
     overflow-x: hidden;
     position: relative;
   }
@@ -317,4 +331,9 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+/* 强制给侧边栏添加毛玻璃模糊效果 */
+.bg-sidebar {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
