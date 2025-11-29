@@ -1,9 +1,6 @@
-import { cookies } from "next/headers";
 import Script from "next/script";
-import { AppSidebar } from "@/components/app-sidebar";
 import { DataStreamProvider } from "@/components/data-stream-provider";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { auth } from "../(auth)/auth";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export const experimental_ppr = true;
 
@@ -12,9 +9,6 @@ export default async function Layout({
 }: {
   children: React.ReactNode;
 }) {
-  const [session, cookieStore] = await Promise.all([auth(), cookies()]);
-  const isCollapsed = cookieStore.get("sidebar_state")?.value !== "true";
-
   return (
     <>
       <Script
@@ -22,10 +16,9 @@ export default async function Layout({
         strategy="beforeInteractive"
       />
       <DataStreamProvider>
-        <SidebarProvider defaultOpen={!isCollapsed}>
-          <div className="sfc-gradient-bg flex min-h-screen w-full">
-            <AppSidebar user={session?.user} />
-            <SidebarInset className="sfc-chat-area">{children}</SidebarInset>
+        <SidebarProvider defaultOpen={true}>
+          <div className="figma-shell">
+            <main className="figma-main">{children}</main>
           </div>
         </SidebarProvider>
       </DataStreamProvider>

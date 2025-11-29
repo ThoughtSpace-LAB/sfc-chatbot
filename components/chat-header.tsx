@@ -24,30 +24,35 @@ function PureChatHeader({
   const { width: windowWidth } = useWindowSize();
 
   return (
-    <header className="sticky top-0 flex items-center gap-2 bg-transparent px-2 py-1.5 md:px-2">
-      <SidebarToggle />
+    <header className="flex items-center justify-between gap-3 rounded-2xl sfc-glass-panel px-4 py-3 text-white">
+      <div className="flex items-center gap-3">
+        <SidebarToggle className="sfc-glass-chip flex h-9 w-9 items-center justify-center rounded-full border border-white/30 bg-transparent p-0 text-white" />
+        <span className="hidden text-sm font-medium text-white/80 md:inline">Conversation controls</span>
+      </div>
 
-      {(!open || windowWidth < 768) && (
-        <Button
-          className="order-2 ml-auto h-8 px-2 md:order-1 md:ml-0 md:h-fit md:px-2"
-          onClick={() => {
-            router.push("/");
-            router.refresh();
-          }}
-          variant="outline"
-        >
-          <PlusIcon />
-          <span className="md:sr-only">New Chat</span>
-        </Button>
-      )}
+      <div className="flex items-center gap-3">
+        {(!open || windowWidth < 768) && (
+          <Button
+            className="sfc-glass-chip h-9 rounded-full border border-white/30 px-3 text-white transition"
+            onClick={() => {
+              router.push("/");
+              router.refresh();
+            }}
+            variant="ghost"
+          >
+            <PlusIcon />
+            <span className="md:sr-only">New Chat</span>
+          </Button>
+        )}
 
-      {!isReadonly && (
-        <VisibilitySelector
-          chatId={chatId}
-          className="order-1 md:order-2"
-          selectedVisibilityType={selectedVisibilityType}
-        />
-      )}
+        {!isReadonly && (
+          <VisibilitySelector
+            chatId={chatId}
+            className="[&>button]:sfc-glass-chip [&>button]:h-9 [&>button]:rounded-full [&>button]:border [&>button]:border-white/30 [&>button]:px-3 [&>button]:text-white"
+            selectedVisibilityType={selectedVisibilityType}
+          />
+        )}
+      </div>
     </header>
   );
 }

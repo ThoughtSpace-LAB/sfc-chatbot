@@ -4,18 +4,23 @@ import Link from "next/link";
 
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import { Button, Card, CardBody } from "@heroui/react";
+import { SiFacebook } from "@icons-pack/react-simple-icons";
 import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 
 import { type LoginActionState, login } from "../actions";
 import { LoaderIcon } from "@/components/icons";
+import { LanhuGlyph } from "@/components/lanhu-glyph";
+
+const LANHU_BACKGROUND =
+  "https://lanhu-oss-2537-2.lanhuapp.com/FigmaDDSSlicePNGae4d43719dc4d2bac848cead745fcb87.png";
 
 export default function Page() {
   const router = useRouter();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
 
   const [state, formAction, isPending] = useActionState<LoginActionState, FormData>(
@@ -39,196 +44,133 @@ export default function Page() {
     }
   }, [state.status, updateSession, router]);
 
+  const isSubmitting = isPending || isSuccessful;
+
+  const Field = ({
+    id,
+    label,
+    type,
+    value,
+    onChange,
+    autoComplete,
+  }: {
+    id: string;
+    label: string;
+    type: string;
+    value: string;
+    autoComplete: string;
+    onChange: (next: string) => void;
+  }) => (
+    <label className="flex w-full max-w-[360px] flex-col gap-2">
+      <span className="text-[12px] text-white">{label}</span>
+      <input
+        id={id}
+        name={id}
+        type={type}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        autoComplete={autoComplete}
+        className="h-[24px] border-b border-white/30 bg-transparent text-[14px] text-white outline-none transition focus:border-white/70"
+      />
+    </label>
+  );
+  const socialButtons = [0, 1, 2];
+
   return (
-    <div className="w-full min-h-screen bg-white flex items-center justify-center p-4">
-      <div className="w-full max-w-[400px]">
-        <form action={formAction} className="flex flex-col gap-6">
-          <div className="flex flex-col gap-2 text-center">
-            <h1
-              className="text-[36px] font-medium leading-[42px] tracking-[0.4px] text-[var(--greengreen-4)]"
-              style={{
-                fontFamily: "var(--headline-xlarge-font-family)",
-                fontSize: "var(--headline-xlarge-font-size)",
-                fontStyle: "var(--headline-xlarge-font-style)",
-                fontWeight: "var(--headline-xlarge-font-weight)",
-                letterSpacing: "var(--headline-xlarge-letter-spacing)",
-                lineHeight: "var(--headline-xlarge-line-height)",
-              }}
-            >
-              Welcome Back
-            </h1>
-            <p
-              className="text-[14px] font-normal leading-[22px] tracking-[0.4px] text-[var(--greengreen-6)]"
-              style={{
-                fontFamily: "var(--text-medium-font-family)",
-                fontSize: "var(--text-medium-font-size)",
-                fontStyle: "var(--text-medium-font-style)",
-                fontWeight: "var(--text-medium-font-weight)",
-                letterSpacing: "var(--text-medium-letter-spacing)",
-                lineHeight: "var(--text-medium-line-height)",
-              }}
-            >
-              Please login to your account
-            </p>
-          </div>
+    <main className="flex h-dvh w-full items-center justify-center overflow-hidden bg-[#37BFA5] text-white">
+      <div className="relative flex h-full w-full max-w-[1440px] items-center justify-center overflow-hidden bg-[#37BFA5] shadow-[0_4px_100px_rgba(0,0,0,0.05)]">
+        <div className="pointer-events-none absolute inset-0">
+          <div
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 h-[2982px] w-[2912px] -translate-x-[58%] -translate-y-[58%] bg-cover bg-no-repeat opacity-80"
+            style={{ backgroundImage: `url(${LANHU_BACKGROUND})` }}
+          />
+        </div>
 
-          <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="email"
-                className="text-[14px] font-normal leading-[22px] tracking-[0.4px] text-[var(--greengreen-4)]"
-                style={{
-                  fontFamily: "var(--text-medium-font-family)",
-                  fontSize: "var(--text-medium-font-size)",
-                  fontStyle: "var(--text-medium-font-style)",
-                  fontWeight: "var(--text-medium-font-weight)",
-                  letterSpacing: "var(--text-medium-letter-spacing)",
-                  lineHeight: "var(--text-medium-line-height)",
-                }}
+        <Card className="relative z-10 h-[560px] w-[440px] rounded-[13px] border border-white/15 bg-black/25 shadow-[0_40px_120px_rgba(0,0,0,0.35)]">
+          <CardBody className="flex h-full flex-col items-center gap-7 px-10 pb-10 pt-[40px]">
+            <LanhuGlyph />
+
+            <form action={formAction} className="flex w-full flex-col items-center gap-6">
+              <div className="flex w-full flex-col items-center gap-4">
+                <Field
+                  id="email"
+                  label="Mail Box"
+                  type="email"
+                  value={email}
+                  onChange={setEmail}
+                  autoComplete="email"
+                />
+
+                <Field
+                  id="password"
+                  label="Password"
+                  type="password"
+                  value={password}
+                  onChange={setPassword}
+                  autoComplete="current-password"
+                />
+              </div>
+
+              <div className="flex w-full max-w-[360px] justify-end">
+                <Link
+                  href="#"
+                  className="text-[12px] text-white/80 underline underline-offset-4"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+
+              <Button
+                type="submit"
+                disableRipple
+                isDisabled={isSubmitting}
+                isLoading={isPending}
+                spinner={<LoaderIcon size={18} />}
+                className="h-12 w-full max-w-[360px] rounded-[12px] bg-white/40 text-[15px] font-medium tracking-[0.6px] text-white transition hover:bg-white/55"
               >
-                Email Address
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                className="w-full px-4 py-3 border border-[var(--greennew-color)] rounded-lg text-[12px] font-normal leading-[22px] tracking-[0.4px] text-[var(--greengreen-4)] placeholder:text-[var(--greennew-color)] focus:outline-none focus:border-[var(--greengreen-6)] focus:ring-1 focus:ring-[var(--greengreen-6)]"
-                style={{
-                  fontFamily: "var(--textbox-regular-font-family)",
-                  fontSize: "var(--textbox-regular-font-size)",
-                  fontStyle: "var(--textbox-regular-font-style)",
-                  fontWeight: "var(--textbox-regular-font-weight)",
-                  letterSpacing: "var(--textbox-regular-letter-spacing)",
-                  lineHeight: "var(--textbox-regular-line-height)",
-                }}
-              />
-            </div>
+                Log in
+              </Button>
 
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="password"
-                className="text-[14px] font-normal leading-[22px] tracking-[0.4px] text-[var(--greengreen-4)]"
-                style={{
-                  fontFamily: "var(--text-medium-font-family)",
-                  fontSize: "var(--text-medium-font-size)",
-                  fontStyle: "var(--text-medium-font-style)",
-                  fontWeight: "var(--text-medium-font-weight)",
-                  letterSpacing: "var(--text-medium-letter-spacing)",
-                  lineHeight: "var(--text-medium-line-height)",
-                }}
-              >
-                Password
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter your password"
-                required
-                className="w-full px-4 py-3 border border-[var(--greennew-color)] rounded-lg text-[12px] font-normal leading-[22px] tracking-[0.4px] text-[var(--greengreen-4)] placeholder:text-[var(--greennew-color)] focus:outline-none focus:border-[var(--greengreen-6)] focus:ring-1 focus:ring-[var(--greengreen-6)]"
-                style={{
-                  fontFamily: "var(--textbox-regular-font-family)",
-                  fontSize: "var(--textbox-regular-font-size)",
-                  fontStyle: "var(--textbox-regular-font-style)",
-                  fontWeight: "var(--textbox-regular-font-weight)",
-                  letterSpacing: "var(--textbox-regular-letter-spacing)",
-                  lineHeight: "var(--textbox-regular-line-height)",
-                }}
-              />
-            </div>
-          </div>
+              <p className="text-[12px] text-white/90">
+                Don&apos;t have an account yet?{" "}
+                <Link className="underline" href="/register">
+                  Register for free
+                </Link>
+              </p>
 
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <input
-                id="remember"
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
-                className="w-4 h-4 border border-[var(--greennew-color)] rounded cursor-pointer accent-[var(--greengreen-6)]"
-              />
-              <label
-                htmlFor="remember"
-                className="text-[11px] font-normal leading-[20px] tracking-[0.4px] text-[var(--greengreen-6)] cursor-pointer"
-                style={{
-                  fontFamily: "var(--text-small-font-family)",
-                  fontSize: "var(--text-small-font-size)",
-                  fontStyle: "var(--text-small-font-style)",
-                  fontWeight: "var(--text-small-font-weight)",
-                  letterSpacing: "var(--text-small-letter-spacing)",
-                  lineHeight: "var(--text-small-line-height)",
-                }}
-              >
-                Remember me
-              </label>
-            </div>
-            <Link
-              href="#"
-              className="text-[11px] font-normal leading-[20px] tracking-[0.4px] text-[var(--greengreen-6)] hover:text-[var(--greengreen-4)] underline"
-              style={{
-                fontFamily: "var(--text-small-font-family)",
-                fontSize: "var(--text-small-font-size)",
-                fontStyle: "var(--text-small-font-style)",
-                fontWeight: "var(--text-small-font-weight)",
-                letterSpacing: "var(--text-small-letter-spacing)",
-                lineHeight: "var(--text-small-line-height)",
-              }}
-            >
-              Forgot Password?
-            </Link>
-          </div>
+              <div className="grid w-full max-w-[360px] grid-cols-3 gap-3">
+                {socialButtons.map((item) => (
+                  <button
+                    key={item}
+                    type="button"
+                    className="flex h-12 items-center justify-center rounded-[999px] border border-white/40 bg-white text-[#0A394B] shadow-[0_8px_25px_rgba(2,51,68,0.2)] transition hover:-translate-y-0.5"
+                  >
+                    <SiFacebook aria-label="Continue with Facebook" size={20} />
+                  </button>
+                ))}
+              </div>
 
-          <button
-            type="submit"
-            disabled={isPending || isSuccessful}
-            className="w-full px-6 py-3 bg-[var(--greengreen-6)] hover:bg-[var(--greengreen-4)] active:bg-[var(--greengreen)] text-white rounded-lg text-[14px] font-medium leading-[24px] tracking-[0.6px] transition-colors duration-200 relative disabled:opacity-50 disabled:cursor-not-allowed"
-            style={{
-              fontFamily: "var(--button-medium-font-family)",
-              fontSize: "var(--button-medium-font-size)",
-              fontStyle: "var(--button-medium-font-style)",
-              fontWeight: "var(--button-medium-font-weight)",
-              letterSpacing: "var(--button-medium-letter-spacing)",
-              lineHeight: "var(--button-medium-line-height)",
-            }}
-          >
-            {isPending ? (
-              <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                <LoaderIcon className="animate-spin" />
-              </span>
-            ) : (
-              "Login"
-            )}
-          </button>
-
-          <div className="text-center">
-            <p
-              className="text-[11px] font-normal leading-[20px] tracking-[0.4px] text-[var(--greengreen-6)]"
-              style={{
-                fontFamily: "var(--text-small-font-family)",
-                fontSize: "var(--text-small-font-size)",
-                fontStyle: "var(--text-small-font-style)",
-                fontWeight: "var(--text-small-font-weight)",
-                letterSpacing: "var(--text-small-letter-spacing)",
-                lineHeight: "var(--text-small-line-height)",
-              }}
-            >
-              Don't have an account?{" "}
               <Link
-                href="/register"
-                className="text-[var(--greengreen-6)] hover:text-[var(--greengreen-4)] underline font-medium"
+                href="#"
+                className="text-[12px] text-white underline underline-offset-4"
               >
-                Sign Up
+                or continue as tourist
               </Link>
-            </p>
-          </div>
-        </form>
+
+              <p className="text-center text-[10px] leading-4 text-white/80">
+                By continuing, you agree to Serena&apos;s <Link className="underline" href="#">
+                  Terms of Service
+                </Link>{" "}
+                and confirm that you have read Serena&apos;s <Link className="underline" href="#">
+                  Privacy Policy
+                </Link>
+              </p>
+            </form>
+          </CardBody>
+        </Card>
       </div>
-    </div>
+    </main>
   );
 }
+
