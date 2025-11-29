@@ -18,12 +18,11 @@ function PureSuggestedActions({ chatId, sendMessage }: SuggestedActionsProps) {
     "What are the advantages of using Next.js?",
     "Write code to demonstrate Dijkstra's algorithm",
     "Help me write an essay about Silicon Valley",
-    "What is the weather in San Francisco?",
   ];
 
   return (
     <div
-      className="grid w-full gap-2 sm:grid-cols-2"
+      className="grid w-full gap-2 sm:grid-cols-3"
       data-testid="suggested-actions"
     >
       {suggestedActions.map((suggestedAction, index) => (
@@ -35,7 +34,7 @@ function PureSuggestedActions({ chatId, sendMessage }: SuggestedActionsProps) {
           transition={{ delay: 0.05 * index }}
         >
           <Suggestion
-            className="h-auto w-full whitespace-normal p-3 text-left"
+            className="flex flex-col items-start w-full h-auto whitespace-normal text-left px-3 py-1.5 gap-1"// filepath: /Users/dev/serenafelix/sfc-chatbot/components/suggested-actions.tsx
             onClick={(suggestion) => {
               window.history.replaceState({}, "", `/chat/${chatId}`);
               sendMessage({
