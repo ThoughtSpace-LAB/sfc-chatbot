@@ -35,20 +35,20 @@ export function SidebarUserNav({ user }: { user: User }) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             {status === "loading" ? (
-              <SidebarMenuButton className="h-10 justify-between bg-transparent data-[state=open]:bg-white/10 data-[state=open]:text-white">
+              <SidebarMenuButton className="h-10 justify-between bg-background data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground">
                 <div className="flex flex-row gap-2">
-                  <div className="size-6 animate-pulse rounded-full bg-white/30" />
-                  <span className="animate-pulse rounded-md bg-white/30 text-transparent">
+                  <div className="size-6 animate-pulse rounded-full bg-zinc-500/30" />
+                  <span className="animate-pulse rounded-md bg-zinc-500/30 text-transparent">
                     Loading auth status
                   </span>
                 </div>
-                <div className="animate-spin text-white/50">
+                <div className="animate-spin text-zinc-500">
                   <LoaderIcon />
                 </div>
               </SidebarMenuButton>
             ) : (
               <SidebarMenuButton
-                className="sfc-user-profile h-10 bg-transparent data-[state=open]:bg-white/10 data-[state=open]:text-white"
+                className="h-10 bg-background data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 data-testid="user-nav-button"
               >
                 <Image

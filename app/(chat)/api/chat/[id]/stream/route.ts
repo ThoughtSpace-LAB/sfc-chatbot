@@ -9,7 +9,7 @@ import {
 import type { Chat } from "@/lib/db/schema";
 import { ChatSDKError } from "@/lib/errors";
 import type { ChatMessage } from "@/lib/types";
-import { getStreamContext } from "../../stream-context";
+import { getStreamContext } from "../../route";
 
 export async function GET(
   _: Request,
