@@ -50,7 +50,8 @@
   --sidebar-border: hsl(220 13% 91%);
   --sidebar-ring: hsl(217.2 91.2% 59.8%);
   /* border radius unit */
-  --radius: 0.5rem;
+  /* 修改history圆角 */
+  --radius: 1rem;
   --sidebar: hsl(0 0% 98%);
 }
 
@@ -58,12 +59,11 @@
 .dark {
   /* 换掉背景色 */
   --background-gradient: linear-gradient(
-    135deg,           /* 角度，改成右上↘左下那种感觉 */
-    #05233D 0%,
-    #085A6F 25%,
-    #0BA28E 50%,
-    #1A6879 75%,
-    #38C5AB 100%
+    45deg,
+    #09101E 0%,
+    #1A6774 41%,
+    #34BE87 72%,
+    #023344 100%
   );
   --foreground: hsl(0 0% 98%);
   --card: hsl(240 10% 3.9%);
@@ -109,8 +109,8 @@
   --breakpoint-toast-mobile: 600px;
 
   --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: var(--radius);
+  --radius-sm: calc(var(--radius) - 8px);
 /* 换掉背景色 */
   --color-background: var(--background-gradient);
   --color-foreground: var(--foreground);
