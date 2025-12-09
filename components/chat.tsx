@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import useSWR, { useSWRConfig } from "swr";
 import { unstable_serialize } from "swr/infinite";
+import { ChatHeader } from "@/components/chat-header";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -155,23 +156,27 @@ export function Chat({
 
   return (
     <>
-      <div className="serena-chat">
-        <div className="serena-chat__thread">
-          <Messages
-            chatId={id}
-            isArtifactVisible={isArtifactVisible}
-            isReadonly={isReadonly}
-            messages={messages}
-            regenerate={regenerate}
-            selectedModelId={initialChatModel}
-            setMessages={setMessages}
-            status={status}
-            votes={votes}
-          />
-        </div>
+      <div className="overscroll-behavior-contain flex h-dvh min-w-0 touch-pan-y flex-col bg-background">
+        <ChatHeader
+          chatId={id}
+          isReadonly={isReadonly}
+          selectedVisibilityType={initialVisibilityType}
+        />
 
-        {!isReadonly && (
-          <div className="serena-chat__composer">
+        <Messages
+          chatId={id}
+          isArtifactVisible={isArtifactVisible}
+          isReadonly={isReadonly}
+          messages={messages}
+          regenerate={regenerate}
+          selectedModelId={initialChatModel}
+          setMessages={setMessages}
+          status={status}
+          votes={votes}
+        />
+
+        <div className="sticky bottom-0 z-1 mx-auto flex w-full max-w-4xl gap-2 border-t-0 bg-background px-2 pb-3 md:px-4 md:pb-4">
+          {!isReadonly && (
             <MultimodalInput
               attachments={attachments}
               chatId={id}
@@ -188,8 +193,8 @@ export function Chat({
               stop={stop}
               usage={usage}
             />
-          </div>
-        )}
+          )}
+        </div>
       </div>
 
       <Artifact
