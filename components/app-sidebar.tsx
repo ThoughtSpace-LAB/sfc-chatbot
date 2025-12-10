@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import type { User } from "next-auth";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -31,8 +32,10 @@ import {
   AlertDialogTitle,
 } from "./ui/alert-dialog";
 
-export function AppSidebar({ user }: { user: User | undefined }) {
+export function AppSidebar({ user: propUser }: { user?: User | undefined }) {
   const router = useRouter();
+  const { data: session } = useSession();
+  const user = propUser || session?.user;
   const { setOpenMobile } = useSidebar();
   const { mutate } = useSWRConfig();
   const [showDeleteAllDialog, setShowDeleteAllDialog] = useState(false);
