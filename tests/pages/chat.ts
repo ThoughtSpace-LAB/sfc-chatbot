@@ -101,24 +101,7 @@ export class ChatPage {
     await this.page.getByTestId("attachments-button").click();
   }
 
-  async getSelectedModel() {
-    const modelId = await this.page.getByTestId("model-selector").innerText();
-    return modelId;
-  }
 
-  async chooseModelFromSelector(chatModelId: string) {
-    const chatModel = chatModels.find(
-      (currentChatModel) => currentChatModel.id === chatModelId
-    );
-
-    if (!chatModel) {
-      throw new Error(`Model with id ${chatModelId} not found`);
-    }
-
-    await this.page.getByTestId("model-selector").click();
-    await this.page.getByTestId(`model-selector-item-${chatModelId}`).click();
-    expect(await this.getSelectedModel()).toBe(chatModel.name);
-  }
 
   async getSelectedVisibility() {
     const visibilityId = await this.page
@@ -142,7 +125,7 @@ export class ChatPage {
     const lastMessageElement = messageElements.at(-1);
 
     if (!lastMessageElement) {
-      return null;
+      throw new Error("No assistant message found");
     }
 
     const content = await lastMessageElement
