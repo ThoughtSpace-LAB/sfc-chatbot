@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { DataStreamHandler } from "@/components/data-stream-handler";
 import { DEFAULT_CHAT_MODEL } from "@/lib/ai/models";
-import { generateUUID } from "@/lib/utils";
-import { AuthCheck } from "@/components/auth-check";
+import { generateUUID } from "@/lib/uuid";
+import { DynamicAuthCheck } from "@/components/auth-check-dynamic";
 import { DynamicChat } from "@/components/chat-dynamic";
 
 export const runtime = "edge";
@@ -16,7 +16,7 @@ export default async function Page() {
 
   return (
     <>
-      <AuthCheck />
+      <DynamicAuthCheck />
       <DynamicChat
         autoResume={false}
         id={id}
