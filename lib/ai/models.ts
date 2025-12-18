@@ -18,4 +18,9 @@ export const chatModels: ChatModel[] = [
     description:
       "Uses advanced chain-of-thought reasoning for complex problems",
   },
+  {
+    id: "google-adk-agent",
+    name: "Google ADK Agent",
+    description: "Custom AI agent powered by Google ADK with tools and specialized capabilities",
+  },
 ];

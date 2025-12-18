@@ -5,6 +5,15 @@ import {
   wrapLanguageModel,
 } from "ai";
 import { isTestEnvironment } from "../constants";
+import { createGoogleADKProvider } from "./google-adk-provider";
+
+// Create Google ADK provider instance
+const googleADKProvider = createGoogleADKProvider({
+  baseURL: process.env.GOOGLE_ADK_API_BASE_URL || "http://localhost:8000",
+  appName: process.env.GOOGLE_ADK_APP_NAME || "my_agent",
+  apiKey: process.env.GOOGLE_ADK_API_KEY,
+  enableStreaming: true,
+});
 
 export const myProvider = isTestEnvironment
   ? (() => {
@@ -20,6 +29,7 @@ export const myProvider = isTestEnvironment
           "chat-model-reasoning": reasoningModel,
           "title-model": titleModel,
           "artifact-model": artifactModel,
+          "google-adk-agent": chatModel, // fallback for testing
         },
       });
     })()
@@ -32,5 +42,7 @@ export const myProvider = isTestEnvironment
         }),
         "title-model": gateway.languageModel("xai/grok-2-1212"),
         "artifact-model": gateway.languageModel("xai/grok-2-1212"),
+        // Google ADK Agent - 直接使用模型ID，由ADK处理实际模型选择
+        "google-adk-agent": googleADKProvider.languageModel("adk-agent"),
       },
     });
