@@ -18,4 +18,9 @@ export const chatModels: ChatModel[] = [
     description:
       "Uses advanced chain-of-thought reasoning for complex problems",
   },
+  {
+    id: "sfc-agent",
+    name: "SFC Fortune Agent",
+    description: "Specialized fortune-telling agent using traditional Chinese divination",
+  },
 ];
