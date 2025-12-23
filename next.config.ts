@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   experimental: {
-    ppr: true,
+    ppr: false,
     optimizePackageImports: ["lucide-react", "date-fns", "framer-motion"],
   },
   images: {
