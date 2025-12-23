@@ -5,8 +5,6 @@ import { generateUUID } from "@/lib/uuid";
 import { DynamicAuthCheck } from "@/components/auth-check-dynamic";
 import { DynamicChat } from "@/components/chat-dynamic";
 
-export const runtime = "edge";
-
 export default async function Page() {
   const id = generateUUID();
 

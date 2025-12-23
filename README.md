@@ -46,6 +46,10 @@ This template uses the [Vercel AI Gateway](https://vercel.com/docs/ai-gateway) t
 
 With the [AI SDK](https://ai-sdk.dev/docs/introduction), you can also switch to direct LLM providers like [OpenAI](https://openai.com), [Anthropic](https://anthropic.com), [Cohere](https://cohere.com/), and [many more](https://ai-sdk.dev/providers/ai-sdk-providers) with just a few lines of code.
 
+### Google ADK Integration
+
+This template includes built-in support for [Google ADK (Agent Development Kit)](https://google.github.io/adk-docs/) agents. ADK allows you to build powerful AI agents with custom tools, memory, and advanced capabilities. See [GOOGLE_ADK_INTEGRATION.md](GOOGLE_ADK_INTEGRATION.md) for detailed setup instructions.
+
 ## Deploy Your Own
 
 You can deploy your own version of the Next.js AI Chatbot to Vercel with one click:
