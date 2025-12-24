@@ -1,4 +1,4 @@
-export const DEFAULT_CHAT_MODEL: string = "google-adk-agent";
+export const DEFAULT_CHAT_MODEL: string = "sfc-agent";
 
 export type ChatModel = {
   id: string;
